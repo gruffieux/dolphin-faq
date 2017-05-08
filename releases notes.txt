@@ -1,3 +1,16 @@
+V. 1.0.4
+---------
+
+Management:
+-Reorganized by distinct tabs.
+-Sorted Q&A by language.
+-Added Q&A clearer numbering.
+-Title field are now required to add or modify.
+
+Other:
+-New module icon.
+
+
 V. 1.0.3
 ---------
 

@@ -20,7 +20,6 @@ $sLangCategory = 'Faq';
 $aLangContent = array(
     '_mg_faq' => 'FAQ',
     '_mg_faq_text' => 'Frequently asked questions',
-    '_mg_faq_settings' => 'FAQ settings',
     '_mg_faq_server_time' => 'Server time:',
     '_mg_faq_user_time' => 'User time:',
     '_mg_faq_title' => 'All Q&A',
@@ -41,6 +40,8 @@ $aLangContent = array(
     '_mg_faq_feedback' => 'Was this article helpful?',
     '_mg_faq_feedbackSugg' => 'Suggestion',
     '_mg_faq_feedbackSent' => 'Thanks for your participation!',
+    '_mg_faq_noFeedback' => 'No feedback yet',
+    '_mg_faq_captionRequired' => 'Please enter a title',
 );
 
 ?>

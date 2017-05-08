@@ -62,14 +62,14 @@ class MgFaqDb extends BxDolModuleDb {
 		return $this->getAll($query);
     }
     
-    function getFaq($idLanguage=0) {
+    function getFaq($idLanguage=0, $sort='ID') {
 		$query = "SELECT * FROM `mg_faq`";
 		
 		if ($idLanguage) {
 			$query .= " WHERE `IDLanguage`=" . $idLanguage;
 		}
 		
-		$query .= " ORDER BY `ID`";
+		$query .= " ORDER BY `$sort`, `ID`";
 		
 		return $this->getAll($query);
     }

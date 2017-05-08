@@ -32,7 +32,6 @@ $aLangContent = array(
 	'_mg_faq_title' => 'Alle FAQ',
 	'_mg_faq_user_time' => 'Lokale Uhrzeit:',
 	'_mg_faq_server_time' => 'Server-Uhrzeit:',
-	'_mg_faq_settings' => 'FAQ-Einstellungen',
 	'_mg_faq_text' => 'Häufig gestellte Fragen (FAQ)',
 	'_mg_faq' => 'FAQ',
 	'_mg_faq_cat_modify' => 'Rubriken ändern',
@@ -41,6 +40,8 @@ $aLangContent = array(
     '_mg_faq_feedback' => 'War dieser Artikel hilfreich?',
     '_mg_faq_feedbackSugg' => 'Vorschlag',
     '_mg_faq_feedbackSent' => 'Vielen Dank für Ihre Teilnahme!',
+    '_mg_faq_noFeedback' => 'Noch keine Feedback',
+    '_mg_faq_captionRequired' => 'Bitte geben Sie eine Titel',
 );
 
 ?>

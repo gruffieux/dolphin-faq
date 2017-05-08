@@ -1,7 +1,7 @@
 Multilingual FAQ
 
 
-Version 1.0.3
+Version 1.0.4
 Compatible with Dolphin 7.1
 
 IMPORTANT: This is a commercial product made by MensGo and cannot be modified other than personal use.
@@ -22,6 +22,7 @@ From FAQ admin panel:
 you can insert/modify your Q&A. Just fill Language, Category, Question and Answer fields.
 You can also insert/modify categories. You can specify a pictogram with relative or absolute URL to your image. Caption field can be a translatable key string.
 Set suggestion e-mail to receive suggestions from members. If emtpy, default site e-mail is used.
+Set Feedback buttons appearance: all results (below each Q&A), search results (below result search only), any or none.
 
 From page builder:
 Set FAQ page's blocks in colomns and order of your choice.
