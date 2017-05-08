@@ -5,7 +5,8 @@
 * Website			: http://www.mensgo.com
 *
 * Product Name		: FAQ
-* Product Version	: 1.0.0
+* Product Version	: 1.0.1
+* Last modification : May 20, 2014
 *
 * IMPORTANT: This is a commercial product made by MensGo
 * and cannot be modified other than personal use.
@@ -109,6 +110,21 @@ class MgFaqPageMain extends BxDolTwigPageMain
                 $searchTitle = _t('_mg_faq_search_title1', $resultCount, $keywords);
             }
             
+            function getWords() {
+                return explode(" ", $_REQUEST['q']);
+            }
+            
+            function getReplaceWords($words) {
+                $replaceWords = array();
+                foreach ($words as $word) {
+                    $replaceWords[] = '<span id="keyword">' . $word . '</span>';
+                }
+                return $replaceWords;
+            }
+            
+            $words = getWords();
+            $replaceWords = getReplaceWords($words);
+            
             // On créé le tableau de résultat en surlignant les mot-clés trouvés
             // On calcul la pertinence de la recherche en attribuant un score pour le nombre de mots trouvés
             // +2 pour chaque mot trouvé dans la question et +1 pour chaque mot trouvé dans la réponse
@@ -121,13 +137,14 @@ class MgFaqPageMain extends BxDolTwigPageMain
                         break;
                     }
                 }
-                $words = explode(" ", $_REQUEST['q']);
-                $replaceWords = array();
-                foreach ($words as $word) {
-                    $replaceWords[] = str_ireplace($word, '<span id="keyword">' . $word . '</span>', $word);
-                }
                 $aSearch[$i]['Question'] = str_ireplace($words, $replaceWords, $aSearch[$i]['Question'], $count1);
-                $aSearch[$i]['Answer'] = str_ireplace($words, $replaceWords, $aSearch[$i]['Answer'], $count2);
+                $pattern = "'>([^<]*)'si"; // recherche les textes en dehors des balises
+                $aSearch[$i]['Answer'] = preg_replace_callback($pattern, function($matches) {
+                    $words = getWords();
+                    $replaceWords = getReplaceWords($words);
+                    return str_ireplace($words, $replaceWords, $matches[0]);
+                }, $aSearch[$i]['Answer'], -1, $count2); 
+                //$aSearch[$i]['Answer'] = str_ireplace($words, $replaceWords, $aSearch[$i]['Answer'], $count2);
                 $aSearch[$i]['Score'] = $count1 * 2 + $count2;
                 $aCat = $this->oMain->_oDb->getCat($aSearch[$i]['IDCat']);
                 $aSearch[$i]['bx_if:pictoUrl'] = array(
@@ -168,7 +185,8 @@ class MgFaqPageMain extends BxDolTwigPageMain
             $oEmailTemplates = new BxDolEmailTemplates();
             $aTemplate = $oEmailTemplates->getTemplate('t_faq_suggestion');
             unset($oEmailTemplates);
-            $subject = sprintf($aTemplate['Subject'], $aProfil['NickName']);
+            $sSender = !empty($aProfil) ? $aProfil['NickName'] : _t('_Guest');
+            $subject = sprintf($aTemplate['Subject'], $sSender);
             $aPlus = array(
                 'SenderID' => $aProfil['ID'],
                 'SenderName' => $aProfil['NickName'],
