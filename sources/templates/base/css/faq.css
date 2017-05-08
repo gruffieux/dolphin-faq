@@ -1,0 +1,56 @@
+.Faq {
+    margin-bottom: 50px;
+}
+
+.Faq TD {
+    padding: 10px 20px 10px 10px; /*top left bottom right*/
+}
+
+.Question {
+    font-weight: bold;
+}
+
+.Answer {
+    font-style: italic;
+}
+
+SPAN#keyword {
+    background-color: yellow;
+}
+
+TR#pair {
+    background-color: #C6E5F1;
+}
+
+TR#unpair {
+    background-color: #F4F7FA;
+}
+
+#suggestion {
+    position: relative;
+    width: 800px;
+    height: 80px;
+}
+
+#bd #button-suggestion {
+	display: block;
+	background-color: #3EA9D3;
+	padding: 6px;
+	/*width: 140px;*/
+	border: 5px solid #7FC7E2;
+	color: #FFF;
+	text-decoration: none;
+	text-align: left;
+	font-weight: bold;
+	font-size: 93%;
+	position: absolute;
+	top: 12px;
+	left: 230px;
+	bottom: 12px;
+	background-color: #3A9FC7;
+	max-width: 200px;
+}
+
+#bd #button-suggestion:hover {
+	border-color: #93DCF8;
+}
