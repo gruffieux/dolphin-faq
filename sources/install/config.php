@@ -20,7 +20,7 @@ $aConfig = array(
 	 * Main Section.
 	 */	
 	'title' => 'Faq', // module title, this name will be displayed in the modules list
-    'version' => '1.0.2', // module version, change this number everytime you publish your mod
+    'version' => '1.0.3', // module version, change this number everytime you publish your mod
 	'vendor' => 'MensGo', // vendor name, also it is a folder name in modules folder
 	'update_url' => 'http://www.boonex.com/market/update_ckeck?product=mg_faq', // url to get info about available module updates
 	

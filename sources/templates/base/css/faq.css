@@ -19,7 +19,8 @@ SPAN#keyword {
 }
 
 TR#pair {
-    background-color: #C6E5F1;
+    background-color: #1fbbe8;
+    color: white;
 }
 
 TR#unpair {

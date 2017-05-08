@@ -38,6 +38,9 @@ $aLangContent = array(
     '_mg_faq_cat_modify' => 'Modifier les catégories',
     '_mg_faq_cat_picto' => 'Pictogramme (URL)',
     '_mg_faq_cat_caption' => 'Légende',
+    '_mg_faq_feedback' => 'Cet article vous a-t\'il été utile?',
+    '_mg_faq_feedbackSugg' => 'Suggéstion',
+    '_mg_faq_feedbackSent' => 'Merci de votre participation!',
 );
 
 ?>

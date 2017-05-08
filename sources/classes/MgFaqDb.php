@@ -36,6 +36,20 @@ class MgFaqDb extends BxDolModuleDb {
 		return $this->query($query);
     }
 	
+	function feedbackYes($id) {
+		$query = "UPDATE `mg_faq`
+			SET `FeedbackYes`=`FeedbackYes`+1 WHERE `ID`='" . $id . "'";
+			
+		return (int)$this->query($query);
+    }
+	
+	function feedbackNo($id) {
+		$query = "UPDATE `mg_faq`
+			SET `FeedbackNo`=`FeedbackNo`+1 WHERE `ID`='" . $id . "'";
+			
+		return (int)$this->query($query);
+    }
+	
 	function getCat($id) {
 		$query = "SELECT * FROM `mg_faq_cats` WHERE `ID` = '" . $id . "' LIMIT 1";
 		
@@ -145,7 +159,7 @@ class MgFaqDb extends BxDolModuleDb {
 			die($e->getMessage());
 		}
 		
-		return fase;
+		return false;
     }
 	
 	function updateCat($id, $picto, $caption) {

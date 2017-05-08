@@ -38,6 +38,9 @@ $aLangContent = array(
     '_mg_faq_cat_modify' => 'Modify  categories',
     '_mg_faq_cat_picto' => 'Pictogram (URL)',
     '_mg_faq_cat_caption' => 'Caption',
+    '_mg_faq_feedback' => 'Was this article helpful?',
+    '_mg_faq_feedbackSugg' => 'Suggestion',
+    '_mg_faq_feedbackSent' => 'Thanks for your participation!',
 );
 
 ?>

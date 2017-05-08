@@ -125,11 +125,27 @@ class MgFaqModule extends BxDolModule {
             );
             $aFaqs = $this->_oDb->getFaq();
             foreach ($aFaqs as $aFaq) {
+                $aVars = array(
+                    'bx_if:avalaible' => array(
+                        'condition' => $aFaq['FeedbackYes'] + $aFaq['FeedbackNo'] > 0,
+                        'content' => array(
+                            'yes' => $aFaq['FeedbackYes'],
+                            'no' => $aFaq['FeedbackNo'],
+                            'rate' => $this->getFeedbackRate($aFaq['FeedbackYes'], $aFaq['FeedbackNo'])
+                        )
+                    ),
+                    'bx_if:notAvalaible' => array(
+                        'condition' => $aFaq['FeedbackYes'] + $aFaq['FeedbackNo'] <= 0,
+                        'content' => array(
+                        )
+                    )
+                );
+                $sStat = $this->_oTemplate->parseHtmlByName('feedback_stat', $aVars);
                 $aModifyForm['inputs'] = array_merge($aModifyForm['inputs'], array(
                     $aFaq['ID'] . '_Start' => array(
                         'type' => 'block_header',
                         'name' => $aFaq['ID'] . '_Start',
-                        'caption' => $aFaq['Question'],
+                        'caption' => $aFaq['Question'] . $sStat,
                         'collapsable' => true,
                         'collapsed' => true
                     ),
@@ -325,6 +341,17 @@ class MgFaqModule extends BxDolModule {
         // Affiche la page
         $this->_oTemplate->pageCodeAdmin (_t('_mg_faq')); // output is completed, admin page will be displaed here
     }
+    
+    function actionFeedback($id, $vote) {
+        if ($vote == 'yes') {
+            $aFaq = $this->_oDb->feedbackYes($id);
+        }
+        else {
+            $aFaq = $this->_oDb->feedbackNo($id);
+        }
+        
+        echo _t('_mg_faq_feedbackSent');
+    }
 
     function actionHome () {
         $this->_oTemplate->pageStart();
@@ -333,6 +360,7 @@ class MgFaqModule extends BxDolModule {
         $oPage = new $sClass ($this);
         echo $oPage->getCode();
         $this->_oTemplate->addCss (array('faq.css'));
+        $this->_oTemplate->addJs("faq.js");
         $this->_oTemplate->pageCode(_t('_mg_faq_text'), false, false);
     }
     
@@ -457,6 +485,16 @@ class MgFaqModule extends BxDolModule {
         );
         
         return $aForm;
+    }
+    
+    function getFeedbackRate($iYes, $iNo) {
+        $iTotal = $iYes + $iNo;
+
+        if (!$iTotal) {
+            return 0;
+        }
+        
+        return ceil($iYes / $iTotal * 100);
     }
     
     function getSearchForm() {

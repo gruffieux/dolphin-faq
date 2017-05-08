@@ -1,3 +1,10 @@
+V. 1.0.3
+---------
+
+Features:
+-Added feedback buttons that can appear on different place of front view: all results (below each Q&A), search results (below Q&A of result search only), any or none.
+
+
 V. 1.0.2
 ---------
 

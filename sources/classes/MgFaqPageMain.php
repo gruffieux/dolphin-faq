@@ -25,6 +25,9 @@ class MgFaqPageMain extends BxDolTwigPageMain
     }
     
     function getBlockCode_Faq() {
+        $sFeedbackAppear = $this->oMain->_oDb->getSetting('mg_faq_feedback');
+        $bFeedbackAppear = $sFeedbackAppear == 'any' || $sFeedbackAppear == 'all_result';
+        
         // On créé le tableau de Q&R complet
         $iLangID = getLangIdByName(getCurrentLangName());
         $aFaq = $this->oMain->_oDb->getFaq($iLangID);
@@ -39,16 +42,25 @@ class MgFaqPageMain extends BxDolTwigPageMain
                 )
             );
             $aFaq[$i]['RowId'] = $aFaq[$i]['Rank'] % 2 > 0 ? "unpair" : "pair";
+            $aFaq[$i]['bx_if:feedbackAppear'] = array(
+                'condition' => $bFeedbackAppear,
+                'content' => array(
+                    'id' => $aFaq[$i]['ID']
+                )
+            );
         }
         
         // FAQ
         $aVars = array (
-            'bx_repeat:faq' => $aFaq
+            'bx_repeat:faq' => $aFaq,
         );
         return $this->oMain->_oTemplate->parseHtmlByName('faq', $aVars);
     }
 
     function getBlockCode_Search() {
+        $sFeedbackAppear = $this->oMain->_oDb->getSetting('mg_faq_feedback');
+        $bFeedbackAppear = $sFeedbackAppear == 'any' || $sFeedbackAppear == 'search_result';
+        $iLangID = getLangIdByName(getCurrentLangName());
         $oSearchForm = new BxTemplFormView($this->oMain->getSearchForm());
         
         // Formulaire de recherche
@@ -59,7 +71,6 @@ class MgFaqPageMain extends BxDolTwigPageMain
         
         // Recherche par mots et/ou par catégorie
         if (isset($_REQUEST['q'])) {
-            $iLangID = getLangIdByName(getCurrentLangName());
             $aSearch = $this->oMain->_oDb->searchFaq($_REQUEST['q'], $iLangID, $_REQUEST['cat']);
             $resultCount = count($aSearch);
             $keywords = htmlspecialchars($_REQUEST['q']);
@@ -118,6 +129,12 @@ class MgFaqPageMain extends BxDolTwigPageMain
                     )
                 );
                 $aSearch[$i]['RowId'] = $aSearch[$i]['Rank'] % 2 > 0 ? "unpair" : "pair";
+                $aSearch[$i]['bx_if:feedbackAppear'] = array(
+                    'condition' => $bFeedbackAppear,
+                    'content' => array(
+                        'id' => $aSearch[$i]['ID']
+                    )
+                );
                 $listScore[$i] = $aSearch[$i]['Score'];
             }
             
@@ -130,6 +147,36 @@ class MgFaqPageMain extends BxDolTwigPageMain
                 'bx_repeat:searchFaq' => $aSearch
             );
             $sResult .= $this->oMain->_oTemplate->parseHtmlByName('faq_search', $aVars);
+        }
+        elseif (!empty($_GET['rank'])) {
+            $aFaq = $this->oMain->_oDb->getFaq($iLangID);
+            for ($i = 0; $i < count($aFaq); $i++) {
+                $iRank = $i + 1;
+                if ($_GET['rank'] == $iRank) {
+                    $aFaq[$i]['Rank'] = $iRank;
+                    $aCat = $this->oMain->_oDb->getCat($aFaq[$i]['IDCat']);
+                    $aFaq[$i]['bx_if:pictoUrl'] = array(
+                        'condition' => $aCat['ID'] != 0,
+                        'content' => array(
+                            'url' => $aCat['Picto'],
+                            'title' => _t($aCat['Caption'])
+                        )
+                    );
+                    $aFaq[$i]['RowId'] = $aFaq[$i]['Rank'] % 2 > 0 ? "unpair" : "pair";
+                    $aFaq[$i]['bx_if:feedbackAppear'] = array(
+                        'condition' => $bFeedbackAppear,
+                        'content' => array(
+                            'id' => $aFaq[$i]['ID']
+                        )
+                    );
+                    $aOneFaq = array($aFaq[$i]);
+                    break;
+                }
+            }
+            $aVars = array (
+                'bx_repeat:faq' => $aOneFaq
+            );
+            $sResult .= $this->oMain->_oTemplate->parseHtmlByName('faq', $aVars);
         }
         
         unset($oSearchForm);

@@ -1,5 +1,5 @@
 <div class="Faq">
-    <table width="100%">
+    <table style="width: 100%">
         <bx_repeat:faq>
             <tr class="Question" id="__RowId__">
                 <td>
@@ -15,6 +15,18 @@
                 <td></td>
                 <td>__Answer__</td>
             </tr>
+            <bx_if:feedbackAppear>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <bx_text:_mg_faq_feedback />
+                        <a href="javascript:;" onclick="feedback(__id__, 'yes');"><bx_text:_Yes /></a>
+                        <a href="javascript:;" onclick="feedback(__id__, 'no');"><bx_text:_No /></a>
+                        <a href="m/faq#suggForm"><bx_text:_mg_faq_feedbackSugg /></a>
+                    </td>
+                </tr>
+            </bx_if:feedbackAppear>
         </bx_repeat:faq>
     </table>
 </div>

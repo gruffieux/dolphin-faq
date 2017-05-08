@@ -5,6 +5,8 @@ CREATE TABLE `mg_faq` (
     `Answer` TEXT NOT NULL ,
     `IDLanguage` TINYINT UNSIGNED NOT NULL default '0' ,
     `IDCat` SMALLINT UNSIGNED NOT NULL default '0' ,
+    `FeedbackYes` INT UNSIGNED NOT NULL default '0' , /*v.1.0.3*/
+    `FeedbackNo` INT UNSIGNED NOT NULL default '0' , /*v.1.0.3*/
     FULLTEXT KEY `Question` (`Question`,`Answer`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -20,7 +22,8 @@ SET @iMaxOrder = (SELECT `menu_order` + 1 FROM `sys_options_cats` ORDER BY `menu
 INSERT INTO `sys_options_cats` (`name`, `menu_order`) VALUES ('Faq', @iMaxOrder);
 SET @iCategId = (SELECT LAST_INSERT_ID());
 INSERT INTO `sys_options` (`Name`, `VALUE`, `kateg`, `desc`, `Type`, `check`, `err_text`, `order_in_kateg`, `AvailableValues`) VALUES
-('mg_faq_suggEmail', '', @iCategId, 'Suggestion e-mail', 'digit', '', '', '1', '');
+('mg_faq_suggEmail', '', @iCategId, 'Suggestion e-mail', 'digit', '', '', '1', ''),
+('mg_faq_feedback', 'any', @iCategId, 'Feedback appear', 'select', '', '', '1', 'any,all_result,search_result,none'); /*v.1.0.3*/
 
 -- admin menu
 SET @iMax = (SELECT MAX(`order`) FROM `sys_menu_admin` WHERE `parent_id` = '2');
