@@ -1,0 +1,8 @@
+V. 1.0.1
+---------
+
+Bug fixed:
+-When searching in FAQ page a word that is contained into a <a> tag, the yellow highlight HTML code was inserted into the href attribute. This caused a distorted output. Now nothing is allowed to be inserted between HTML tags.
+
+Other:
+-Correction in subject of suggestion's mail when no member connected.
