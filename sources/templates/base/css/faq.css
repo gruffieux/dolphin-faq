@@ -2,56 +2,38 @@
     margin-bottom: 50px;
 }
 
-.Faq TD {
-    padding: 10px 20px 10px 10px; /*top left bottom right*/
+.Faq table {
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
 }
 
-.Question {
-    font-weight: bold;
+.Faq td {
+    padding-bottom: 20px;
 }
 
-.Answer {
-    font-style: italic;
-}
-
-SPAN#keyword {
-    background-color: yellow;
-}
-
-TR#pair {
+.Faq tr#pair {
     background-color: #1fbbe8;
     color: white;
 }
 
-TR#unpair {
+.Faq tr#unpair {
     background-color: #F4F7FA;
 }
 
-#suggestion {
-    position: relative;
-    width: 800px;
-    height: 80px;
+.Faq .Question {
+    font-weight: bold;
 }
 
-#bd #button-suggestion {
-	display: block;
-	background-color: #3EA9D3;
-	padding: 6px;
-	/*width: 140px;*/
-	border: 5px solid #7FC7E2;
-	color: #FFF;
-	text-decoration: none;
-	text-align: left;
-	font-weight: bold;
-	font-size: 93%;
-	position: absolute;
-	top: 12px;
-	left: 230px;
-	bottom: 12px;
-	background-color: #3A9FC7;
-	max-width: 200px;
+.Faq .Answer {
+    font-style: italic;
 }
 
-#bd #button-suggestion:hover {
-	border-color: #93DCF8;
+.Faq img {
+    max-width: 100%;
+    height: auto;
+}
+
+.Faq span#keyword {
+    background-color: yellow;
 }

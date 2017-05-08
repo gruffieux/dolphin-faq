@@ -1,3 +1,9 @@
+V. 1.0.6
+---------
+
+-Responsible Design 7.2.x adaptation
+
+
 V. 1.0.5
 ---------
 
