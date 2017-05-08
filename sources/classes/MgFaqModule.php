@@ -231,6 +231,30 @@ class MgFaqModule extends BxDolModule {
                 echo DesignBoxAdmin (_t('_mg_faq_insert'), $sResult, $aMenu); // display box
             }
             else {
+				// Pagination
+				$iTotalNum = db_value("SELECT COUNT(`ID`) FROM `mg_faq`");
+				$urlPagination = BX_DOL_URL_ROOT . $this->_oConfig->getBaseUri() . "administration/faq&page={page}";
+				$iPage = !empty($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+				$iPerPage = db_value("SELECT COUNT(`ID`) FROM `mg_faq` GROUP BY `IDLanguage`");
+				if ($iPerPage > 60) {
+					$iPerPage = 60;
+				}
+				$iLimitFrom = ($iPage - 1) * $iPerPage;
+				$oPaginate = new BxDolPaginate(
+					array(
+						'page_url'	        => $urlPagination,
+						'count'		        => $iTotalNum,
+						'per_page'	        => $iPerPage,
+						'range'             => 20,
+						'page'		        => $iPage,
+						'per_page_changer'  => false,
+						'page_reloader'		=> false,
+						'view_all'          => false
+					)
+				);
+				$sPaginate = $oPaginate->getPaginate();
+				unset($oPaginate);
+		
                 // Formulaires de modification
                 $aModifyForm = array(
                     'form_attrs' => array(
@@ -250,7 +274,7 @@ class MgFaqModule extends BxDolModule {
                     ),
                     'inputs' => array ()
                 );
-                $aFaqs = $this->_oDb->getFaq(0, 'IDLanguage');
+                $aFaqs = $this->_oDb->getFaq(0, 'IDLanguage', $iLimitFrom, $iPerPage);
                 $iRank = 1;
                 $iLang = 0;
                 foreach ($aFaqs as $aFaq) {
@@ -380,6 +404,7 @@ class MgFaqModule extends BxDolModule {
                 $sResult .= $this->_oTemplate->addJs("faq.js", true);
                 $sResult .= $oModifyForm->getCode();
                 unset($oModifyForm, $aModifyForm);
+				$sResult .= $sPaginate;
                 echo DesignBoxAdmin (_t('_mg_faq_modify'), $sResult, $aMenu); // dsiplay box
             }
         }

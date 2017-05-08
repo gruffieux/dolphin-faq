@@ -1,3 +1,13 @@
+V. 1.0.7
+---------
+
+Management:
+-Optimized and paginated Q&A list
+
+Other:
+-Feedback form is hidden if not connected
+
+
 V. 1.0.6
 ---------
 

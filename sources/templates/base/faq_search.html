@@ -24,7 +24,9 @@
                         <bx_text:_mg_faq_feedback />
                         <a href="javascript:;" onclick="feedback(__id__, 'yes');"><bx_text:_Yes /></a>
                         <a href="javascript:;" onclick="feedback(__id__, 'no');"><bx_text:_No /></a>
-                        <a href="m/faq#suggForm"><bx_text:_mg_faq_feedbackSugg /></a>
+                        <bx_if:isLogged>
+                            <a href="m/faq#suggForm"><bx_text:_mg_faq_feedbackSugg /></a>
+                        </bx_if:isLogged>
                     </td>
                 </tr>
             </bx_if:feedbackAppear>

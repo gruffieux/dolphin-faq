@@ -62,7 +62,7 @@ class MgFaqDb extends BxDolModuleDb {
 		return $this->getAll($query);
     }
     
-    function getFaq($idLanguage=0, $sort='ID') {
+    function getFaq($idLanguage=0, $sort='ID', $from=0, $page=0) {
 		$query = "SELECT * FROM `mg_faq`";
 		
 		if ($idLanguage) {
@@ -70,6 +70,10 @@ class MgFaqDb extends BxDolModuleDb {
 		}
 		
 		$query .= " ORDER BY `$sort`, `ID`";
+		
+		if ($page) {
+			$query .= " LIMIT $from, $page";
+		}
 		
 		return $this->getAll($query);
     }

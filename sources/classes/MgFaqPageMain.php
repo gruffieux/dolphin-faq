@@ -45,7 +45,11 @@ class MgFaqPageMain extends BxDolTwigPageMain
             $aFaq[$i]['bx_if:feedbackAppear'] = array(
                 'condition' => $bFeedbackAppear,
                 'content' => array(
-                    'id' => $aFaq[$i]['ID']
+                    'id' => $aFaq[$i]['ID'],
+                    'bx_if:isLogged' => array(
+                        'condition' => isLogged(),
+                        'content' => array()
+                    )
                 )
             );
         }
@@ -132,7 +136,11 @@ class MgFaqPageMain extends BxDolTwigPageMain
                 $aSearch[$i]['bx_if:feedbackAppear'] = array(
                     'condition' => $bFeedbackAppear,
                     'content' => array(
-                        'id' => $aSearch[$i]['ID']
+                        'id' => $aSearch[$i]['ID'],
+                        'bx_if:isLogged' => array(
+                            'condition' => isLogged(),
+                            'content' => array()
+                        )
                     )
                 );
                 $listScore[$i] = $aSearch[$i]['Score'];
@@ -166,7 +174,11 @@ class MgFaqPageMain extends BxDolTwigPageMain
                     $aFaq[$i]['bx_if:feedbackAppear'] = array(
                         'condition' => $bFeedbackAppear,
                         'content' => array(
-                            'id' => $aFaq[$i]['ID']
+                            'id' => $aFaq[$i]['ID'],
+                            'bx_if:isLogged' => array(
+                                'condition' => isLogged(),
+                                'content' => array()
+                            )
                         )
                     );
                     $aOneFaq = array($aFaq[$i]);
@@ -185,6 +197,10 @@ class MgFaqPageMain extends BxDolTwigPageMain
     }
     
     function getBlockCode_Suggestion() {
+        if (!isLogged()) {
+            return;
+        }
+        
         global $site;
         
         $oSuggForm = new BxTemplFormView($this->oMain->getSuggestionForm());
