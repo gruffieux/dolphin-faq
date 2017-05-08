@@ -459,6 +459,46 @@ class MgFaqModule extends BxDolModule {
         return $aForm;
     }
     
+    function getSearchForm() {
+        // Chargement des catégories
+        $aCats = $this->_oDb->getCats();
+        $aCatChooser = array(array('key' => 0, 'value' => _t("_categ_all")));
+        foreach($aCats as $aCat) {
+            $value = !empty($aCat['Caption']) ? _t($aCat['Caption']) : $aCat['Picto'];
+            $aCatChooser[] = array('key' => $aCat['ID'], 'value' => $value);
+        }
+        
+        $aForm = array(
+            'form_attrs' => array(
+                'name'     => 'form_search',
+                'action'   => 'm/' . $this->_oConfig->_sUri, // La method GET ne supporte pas la redirection vers une url de type ?r=faq
+                'method'   => 'get',
+            ),
+            'inputs' => array(
+                'q' => array(
+                    'type' => 'text',
+                    'name' => 'q',
+                ),
+                'cat' => array(
+                    'type' => 'select',
+                    'name' => 'cat',
+                    'value' => 0,
+                    'values' => $aCatChooser,
+                    'db' => array (
+                        'pass' => 'Int',
+                    ),
+                ),
+                'submit' => array (
+                    'type' => 'submit',
+                    'name' => 'submit_form',
+                    'value' => _t('_Search'),
+                ),
+            ),
+        );
+        
+        return $aForm;
+    }
+    
     function getSuggestionForm() {
         $aForm = array(
             'form_attrs' => array(

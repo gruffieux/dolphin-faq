@@ -5,7 +5,7 @@
 * Website			: http://www.mensgo.com
 *
 * Product Name		: FAQ
-* Product Version	: 1.0.1
+* Product Version	: 1.0.2
 *
 * IMPORTANT: This is a commercial product made by MensGo
 * and cannot be modified other than personal use.
@@ -20,7 +20,7 @@ $aConfig = array(
 	 * Main Section.
 	 */	
 	'title' => 'Faq', // module title, this name will be displayed in the modules list
-    'version' => '1.0.1', // module version, change this number everytime you publish your mod
+    'version' => '1.0.2', // module version, change this number everytime you publish your mod
 	'vendor' => 'MensGo', // vendor name, also it is a folder name in modules folder
 	'update_url' => 'http://www.boonex.com/market/update_ckeck?product=mg_faq', // url to get info about available module updates
 	

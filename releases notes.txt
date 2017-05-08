@@ -1,3 +1,13 @@
+V. 1.0.2
+---------
+
+Languages:
+-Added german package.
+
+Bug fixed:
+-When searching from URL /modules?r=faq, it did an error (module not found).
+
+
 V. 1.0.1
 ---------
 

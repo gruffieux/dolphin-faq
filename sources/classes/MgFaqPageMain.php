@@ -49,44 +49,7 @@ class MgFaqPageMain extends BxDolTwigPageMain
     }
 
     function getBlockCode_Search() {
-        // Chargement des catégories
-        $aCats = $this->oMain->_oDb->getCats();
-        $aCatChooser = array(array('key' => 0, 'value' => _t("_categ_all")));
-        foreach($aCats as $aCat) {
-            $value = !empty($aCat['Caption']) ? _t($aCat['Caption']) : $aCat['Picto'];
-            $aCatChooser[] = array('key' => $aCat['ID'], 'value' => $value);
-        }
-        
-        // Formulaire de recherche
-        $aSearchForm = array(
-            'form_attrs' => array(
-                'name'     => 'form_search',
-                'action'   => '',
-                'method'   => 'get',
-            ),
-            'inputs' => array(
-                'q' => array(
-                    'type' => 'text',
-                    'name' => 'q',
-                ),
-                'cat' => array(
-                    'type' => 'select',
-                    'name' => 'cat',
-                    'value' => 0,
-                    'values' => $aCatChooser,
-                    'db' => array (
-                        'pass' => 'Int',
-                    ),
-                ),
-                'submit' => array (
-                    'type' => 'submit',
-                    'name' => 'submit_form',
-                    'value' => _t('_Search'),
-                ),
-            ),
-        );
-        
-        $oSearchForm = new BxTemplFormView($aSearchForm);
+        $oSearchForm = new BxTemplFormView($this->oMain->getSearchForm());
         
         // Formulaire de recherche
         $aVars = array (
@@ -205,6 +168,9 @@ class MgFaqPageMain extends BxDolTwigPageMain
         $aVars = array (
             'SuggestionForm' => $oSuggForm->getCode(),
         );
+        
+        unset($oSuggForm);
+        
         return $this->oMain->_oTemplate->parseHtmlByName('suggestion', $aVars);
     }
 }
