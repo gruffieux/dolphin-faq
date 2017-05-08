@@ -1,8 +1,8 @@
 Multilingual FAQ
 
 
-Version 1.0.4
-Compatible with Dolphin 7.1
+Version 1.0.5
+Compatible with Dolphin 7.2
 
 IMPORTANT: This is a commercial product made by MensGo and cannot be modified other than personal use.
 This product cannot be redistributed for free or a fee without written permission from MensGo.

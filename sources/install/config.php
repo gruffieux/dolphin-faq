@@ -5,7 +5,7 @@
 * Website			: http://www.mensgo.com
 *
 * Product Name		: FAQ
-* Product Version	: 1.0.4
+* Product Version	: 1.0.5
 *
 * IMPORTANT: This is a commercial product made by MensGo
 * and cannot be modified other than personal use.
@@ -20,12 +20,12 @@ $aConfig = array(
 	 * Main Section.
 	 */	
 	'title' => 'Faq', // module title, this name will be displayed in the modules list
-    'version' => '1.0.4', // module version, change this number everytime you publish your mod
+    'version' => '1.0.5', // module version, change this number everytime you publish your mod
 	'vendor' => 'MensGo', // vendor name, also it is a folder name in modules folder
 	'update_url' => 'http://www.boonex.com/market/update_ckeck?product=mg_faq', // url to get info about available module updates
 	
 	'compatible_with' => array( // module compatibility
-        '7.1.x'  // it tells that the module can be installed on Dolphin 7.0.0 only.
+        '7.2.x'  // it tells that the module can be installed on Dolphin 7.0.0 only.
     ),
 
     /**
